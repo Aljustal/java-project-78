@@ -8,7 +8,7 @@ public class StringSchema {
     public final void required() {
         this.required = true;
     }
-    public void minLength(int length) {
+    public final void minLength(int length) {
         this.minLength = length;
     }
     public final StringSchema contains(String str) {
