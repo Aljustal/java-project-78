@@ -11,12 +11,12 @@ public class StringSchema {
     public void minLength(int length) {
         this.minLength = length;
     }
-    public StringSchema contains(String str) {
+    public final StringSchema contains(String str) {
         this.contains = str;
         return this;
     }
 
-    public Boolean isValid(String str) {
+    public final Boolean isValid(String str) {
 
         if (required && (str == null || str.isEmpty())) {
             return false;
