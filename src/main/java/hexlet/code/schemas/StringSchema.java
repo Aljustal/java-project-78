@@ -5,14 +5,14 @@ public class StringSchema {
     private Boolean required = false;
     private int minLength;
     private String contains = "";
-    public void required() {
+    public final void required() {
         this.required = true;
     }
-    public void minLength(int minLength) {
-        this.minLength = minLength;
+    public final void minLength(int length) {
+        this.minLength = length;
     }
-    public StringSchema contains(String contains) {
-        this.contains = contains;
+    public StringSchema contains(String str) {
+        this.contains = str;
         return this;
     }
 
