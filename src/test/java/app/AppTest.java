@@ -47,4 +47,10 @@ public class AppTest {
         Boolean actual3 = stringSchema.isValid("what does the fox say");
         assertThat(actual3).isEqualTo(false);
     }
+    @Test
+    void testStringSchema6() {
+        stringSchema.minLength(5);
+        Boolean actual = stringSchema.isValid("what does the fox say");
+        assertThat(actual).isEqualTo(true);
+    }
 }

@@ -2,16 +2,14 @@ package hexlet.code.schemas;
 
 public class StringSchema {
 
-    Boolean required = false;
-    int minLength;
-    String contains = "";
-    public StringSchema required() {
+    private Boolean required = false;
+    private int minLength;
+    private String contains = "";
+    public void required() {
         this.required = true;
-        return this;
     }
-    public StringSchema minLength(int minLength) {
+    public void minLength(int minLength) {
         this.minLength = minLength;
-        return this;
     }
     public StringSchema contains(String contains) {
         this.contains = contains;
