@@ -1,22 +1,24 @@
 package hexlet.code.schemas;
 
-public class StringSchema {
+public final class StringSchema extends BaseSchema {
 
     private Boolean required = false;
     private int minLength;
     private String contains = "";
-    public final void required() {
+    public void required() {
         this.required = true;
     }
-    public final void minLength(int length) {
+    public void minLength(int length) {
         this.minLength = length;
     }
-    public final StringSchema contains(String str) {
+    public StringSchema contains(String str) {
         this.contains = str;
         return this;
     }
+    @Override
+    public Boolean isValid(Object obj) {
 
-    public final Boolean isValid(String str) {
+        String str = (String) obj;
 
         if (required && (str == null || str.isEmpty())) {
             return false;
