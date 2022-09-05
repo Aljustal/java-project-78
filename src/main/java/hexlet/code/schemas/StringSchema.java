@@ -1,12 +1,12 @@
 package hexlet.code.schemas;
 
 public final class StringSchema extends BaseSchema {
-
     private Boolean required = false;
     private int minLength;
     private String contains = "";
-    public void required() {
+    public StringSchema required() {
         this.required = true;
+        return this;
     }
     public void minLength(int length) {
         this.minLength = length;

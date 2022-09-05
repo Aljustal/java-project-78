@@ -34,8 +34,14 @@ public final class NumberSchema extends BaseSchema {
             return false;
         }
 
-        if (positive && number < 0) {
-            return false;
+        if (positive) {
+            try {
+                if (number < 0) {
+                    return false;
+                }
+            } catch (NullPointerException e) {
+                return true;
+            }
         }
 
         if (range && (startRange > number || number > endRange)) {

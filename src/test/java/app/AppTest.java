@@ -1,6 +1,7 @@
 package app;
 
 import hexlet.code.Validator;
+import hexlet.code.schemas.BaseSchema;
 import hexlet.code.schemas.MapSchema;
 import hexlet.code.schemas.NumberSchema;
 import hexlet.code.schemas.StringSchema;
@@ -16,7 +17,6 @@ public class AppTest {
     private final Validator validator = new Validator();
     private final StringSchema stringSchema = validator.string();
     private final NumberSchema numberSchema = validator.number();
-
     private final MapSchema mapSchema = validator.map();
     @Test
     void testStringSchema1()  {
@@ -73,7 +73,7 @@ public class AppTest {
         Boolean actual1 = numberSchema.isValid(null);
         assertThat(actual1).isEqualTo(false);
 
-        Boolean actual2 = numberSchema.isValid(10);
+        Boolean actual2 = numberSchema.isValid(Integer.parseInt("10"));
         assertThat(actual2).isEqualTo(true);
 
         Boolean actual3 = numberSchema.isValid("10");
@@ -82,27 +82,27 @@ public class AppTest {
 
     @Test
     void testNumberSchema3() {
-        Boolean actual1 = numberSchema.positive().isValid(10);
+        Boolean actual1 = numberSchema.positive().isValid(Integer.parseInt("10"));
         assertThat(actual1).isEqualTo(true);
 
-        Boolean actual2 = numberSchema.isValid(-10);
+        Boolean actual2 = numberSchema.isValid(Integer.parseInt("-10"));
         assertThat(actual2).isEqualTo(false);
     }
 
     @Test
     void testNumberSchema4() {
-        numberSchema.range(5, 10);
+        numberSchema.range(Integer.parseInt("5"), Integer.parseInt("10"));
 
-        Boolean actual1 = numberSchema.isValid(5);
+        Boolean actual1 = numberSchema.isValid(Integer.parseInt("5"));
         assertThat(actual1).isEqualTo(true);
 
-        Boolean actual2 = numberSchema.isValid(10);
+        Boolean actual2 = numberSchema.isValid(Integer.parseInt("10"));
         assertThat(actual2).isEqualTo(true);
 
-        Boolean actual3 = numberSchema.isValid(4);
+        Boolean actual3 = numberSchema.isValid(Integer.parseInt("4"));
         assertThat(actual3).isEqualTo(false);
 
-        Boolean actual4 = numberSchema.isValid(11);
+        Boolean actual4 = numberSchema.isValid(Integer.parseInt("11"));
         assertThat(actual4).isEqualTo(false);
     }
 
@@ -148,5 +148,58 @@ public class AppTest {
         data.put("key2", "value2");
         Boolean actual2 = mapSchema.isValid(data);
         assertThat(actual2).isEqualTo(true);
+    }
+    @Test
+    void testMapSchemaShape1() {
+        Map<String, BaseSchema> schemas = new HashMap<>();
+        schemas.put("name", validator.string().required());
+        schemas.put("age", validator.number().positive());
+        mapSchema.shape(schemas);
+
+        Map<String, Object> human1 = new HashMap<>();
+        human1.put("name", "Kolya");
+        human1.put("age", 100);
+        Boolean actual1 = mapSchema.isValid(human1);
+        assertThat(actual1).isEqualTo(true);
+    }
+    @Test
+    void testMapSchemaShape2() {
+        Map<String, BaseSchema> schemas = new HashMap<>();
+        schemas.put("name", validator.string().required());
+        schemas.put("age", validator.number().positive());
+        mapSchema.shape(schemas);
+
+        Map<String, Object> human2 = new HashMap<>();
+        human2.put("name", "Maya");
+        human2.put("age", null);
+        Boolean actual2 = mapSchema.isValid(human2);
+        assertThat(actual2).isEqualTo(true);
+    }
+
+    @Test
+    void testMapSchemaShape3() {
+        Map<String, BaseSchema> schemas = new HashMap<>();
+        schemas.put("name", validator.string().required());
+        schemas.put("age", validator.number().positive());
+        mapSchema.shape(schemas);
+
+        Map<String, Object> human3 = new HashMap<>();
+        human3.put("name", "");
+        human3.put("age", null);
+        Boolean actual3 = mapSchema.isValid(human3);
+        assertThat(actual3).isEqualTo(false);
+    }
+    @Test
+    void testMapSchemaShape4() {
+        Map<String, BaseSchema> schemas = new HashMap<>();
+        schemas.put("name", validator.string().required());
+        schemas.put("age", validator.number().positive());
+        mapSchema.shape(schemas);
+
+        Map<String, Object> human4 = new HashMap<>();
+        human4.put("name", "Valya");
+        human4.put("age", -5);
+        Boolean actual4 = mapSchema.isValid(human4);
+        assertThat(actual4).isEqualTo(false);
     }
 }
