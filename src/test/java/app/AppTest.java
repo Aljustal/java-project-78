@@ -18,6 +18,12 @@ public class AppTest {
     private final StringSchema stringSchema = validator.string();
     private final NumberSchema numberSchema = validator.number();
     private final MapSchema mapSchema = validator.map();
+
+    private final Integer testNumber4 = 4;
+    private final Integer testNumber5 = 5;
+    private final Integer testNumber10 = 10;
+    private final Integer testNegativeNumber = -10;
+
     @Test
     void testStringSchema1()  {
         Boolean actual = stringSchema.isValid("");
@@ -91,18 +97,19 @@ public class AppTest {
 
     @Test
     void testNumberSchema4() {
-        numberSchema.range(Integer.parseInt("5"), Integer.parseInt("10"));
+        numberSchema.range(testNumber5, testNumber10);
 
-        Boolean actual1 = numberSchema.isValid(Integer.parseInt("5"));
+        Boolean actual1 = numberSchema.isValid(testNumber5);
         assertThat(actual1).isEqualTo(true);
 
-        Boolean actual2 = numberSchema.isValid(Integer.parseInt("10"));
+        Boolean actual2 = numberSchema.isValid(testNumber10);
         assertThat(actual2).isEqualTo(true);
 
-        Boolean actual3 = numberSchema.isValid(Integer.parseInt("4"));
+        Boolean actual3 = numberSchema.isValid(testNumber4);
         assertThat(actual3).isEqualTo(false);
 
-        Boolean actual4 = numberSchema.isValid(Integer.parseInt("11"));
+        Integer testNumber11 = 11;
+        Boolean actual4 = numberSchema.isValid(testNumber11);
         assertThat(actual4).isEqualTo(false);
     }
 
