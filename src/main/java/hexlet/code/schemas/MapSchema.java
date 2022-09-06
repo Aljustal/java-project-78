@@ -12,9 +12,9 @@ public final class MapSchema extends BaseSchema {
     public void required() {
         this.required = true;
     }
-    public void sizeof(int size) {
+    public void sizeof(int mapSize) {
         this.sizeof = true;
-        this.size = size;
+        this.size = mapSize;
     }
     public void shape(Map map) {
         this.shape = true;
