@@ -1,7 +1,7 @@
 package hexlet.code.schemas;
 import java.util.Map;
 
-public class MapSchema extends BaseSchema {
+public final class MapSchema extends BaseSchema {
     private Boolean required = false;
     private Boolean sizeof = false;
     private Boolean shape = false;

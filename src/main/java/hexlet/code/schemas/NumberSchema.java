@@ -15,10 +15,10 @@ public final class NumberSchema extends BaseSchema {
         this.positive = true;
         return this;
     }
-    public void range(int startRange, int endRange) {
+    public void range(int start, int end) {
         this.range = true;
-        this.startRange = startRange;
-        this.endRange = endRange;
+        this.startRange = start;
+        this.endRange = end;
     }
 
     @Override

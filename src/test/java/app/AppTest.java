@@ -22,6 +22,7 @@ public class AppTest {
     private final Integer testNumber4 = 4;
     private final Integer testNumber5 = 5;
     private final Integer testNumber10 = 10;
+    private final Integer testNumber11 = 11;
     private final Integer testNegativeNumber = -10;
 
     @Test
@@ -108,7 +109,6 @@ public class AppTest {
         Boolean actual3 = numberSchema.isValid(testNumber4);
         assertThat(actual3).isEqualTo(false);
 
-        Integer testNumber11 = 11;
         Boolean actual4 = numberSchema.isValid(testNumber11);
         assertThat(actual4).isEqualTo(false);
     }
@@ -165,7 +165,7 @@ public class AppTest {
 
         Map<String, Object> human1 = new HashMap<>();
         human1.put("name", "Kolya");
-        human1.put("age", 100);
+        human1.put("age", testNumber10);
         Boolean actual1 = mapSchema.isValid(human1);
         assertThat(actual1).isEqualTo(true);
     }
@@ -205,7 +205,7 @@ public class AppTest {
 
         Map<String, Object> human4 = new HashMap<>();
         human4.put("name", "Valya");
-        human4.put("age", -5);
+        human4.put("age", testNegativeNumber);
         Boolean actual4 = mapSchema.isValid(human4);
         assertThat(actual4).isEqualTo(false);
     }
