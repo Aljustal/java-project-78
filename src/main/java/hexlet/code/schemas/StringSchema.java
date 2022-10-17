@@ -2,7 +2,7 @@ package hexlet.code.schemas;
 
 public final class StringSchema extends BaseSchema {
     @Override
-    public final StringSchema required() {
+    public StringSchema required() {
         requiredOn();
         addPredicate(x -> {
             if (x instanceof String) {
@@ -12,11 +12,11 @@ public final class StringSchema extends BaseSchema {
         });
         return this;
     }
-    public  final  StringSchema contains(String subString) {
+    public StringSchema contains(String subString) {
         addPredicate(x -> x.toString().contains(subString));
         return this;
     }
-    public final StringSchema length(int lenght) {
+    public StringSchema length(int lenght) {
         addPredicate(x -> x.toString().length() >= lenght);
         return this;
     }
