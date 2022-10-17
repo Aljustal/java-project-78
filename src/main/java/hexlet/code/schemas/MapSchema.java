@@ -2,49 +2,24 @@ package hexlet.code.schemas;
 import java.util.Map;
 
 public final class MapSchema extends BaseSchema {
-    private Boolean required = false;
-    private Boolean sizeof = false;
-    private Boolean shape = false;
-    private Map<String, BaseSchema> shapeMap;
-
-    private Integer size;
-
-    public void required() {
-        this.required = true;
-    }
-    public void sizeof(int mapSize) {
-        this.sizeof = true;
-        this.size = mapSize;
-    }
-    public void shape(Map map) {
-        this.shape = true;
-        this.shapeMap = map;
-    }
-
     @Override
-    public Boolean isValid(Object obj) {
-
-        var map = (Map) obj;
-
-        if (required && map == null) {
-            return false;
-        }
-
-        if (sizeof && map.size() != size) {
-            return false;
-        }
-
-        if (shape) {
-            for (var el: shapeMap.entrySet()) {
-                var value = map.get(el.getKey());
-                var shema = el.getValue().isValid(value);
-
-                if (!shema) {
+    public MapSchema required() {
+        requiredOn();
+        addPredicate(x -> x instanceof Map);
+        return this;
+    }
+    public MapSchema sizeof(int size) {
+        addPredicate(map -> ((Map<?, ?>) map).size() == size);
+        return this;
+    }
+    public final void shape(final Map<String, BaseSchema> map) {
+        addPredicate(x -> {
+            for (Map.Entry<String, BaseSchema> entry : map.entrySet()) {
+                if (!entry.getValue().isValid(((Map<?, ?>) x).get(entry.getKey()))) {
                     return false;
                 }
             }
-        }
-
-        return true;
+            return true;
+        });
     }
 }

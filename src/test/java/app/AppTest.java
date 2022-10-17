@@ -64,7 +64,7 @@ public class AppTest {
     }
     @Test
     void testStringSchema6() {
-        stringSchema.minLength(Integer.parseInt("5"));
+        stringSchema.length(Integer.parseInt("5"));
         Boolean actual = stringSchema.isValid("what does the fox say");
         assertThat(actual).isEqualTo(true);
     }

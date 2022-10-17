@@ -1,53 +1,41 @@
 package hexlet.code.schemas;
 
 public final class NumberSchema extends BaseSchema {
-    private Boolean required = false;
-    private Boolean positive = false;
-    private Boolean range = false;
-    private int startRange;
-    private int endRange;
-
-    public void required() {
-        this.required = true;
+    @Override
+    public NumberSchema required() {
+        requiredOn();
+        addPredicate(x -> {
+            if (x instanceof Integer || x instanceof Double) {
+                return true;
+            }
+            return false;
+        });
+        return this;
     }
 
     public NumberSchema positive() {
-        this.positive = true;
+        addPredicate(x -> {
+            if (x instanceof Integer) {
+                return (int) x > 0;
+            }
+            if (x instanceof Double) {
+                return (double) x > 0;
+            }
+            return false;
+        });
         return this;
     }
-    public void range(int start, int end) {
-        this.range = true;
-        this.startRange = start;
-        this.endRange = end;
-    }
 
-    @Override
-    public Boolean isValid(Object obj) {
-        Integer number;
-        try {
-            number = (Integer) obj;
-        } catch (ClassCastException e) {
-            return false;
-        }
-
-        if (required && number == null) {
-            return false;
-        }
-
-        if (positive) {
-            try {
-                if (number < 0) {
-                    return false;
-                }
-            } catch (NullPointerException e) {
-                return true;
+    public NumberSchema range(int startRange, int endRange) {
+        addPredicate(x -> {
+            if (x instanceof Integer) {
+                return (int) x >= startRange && (int) x <= endRange;
             }
-        }
-
-        if (range && (startRange > number || number > endRange)) {
+            if (x instanceof Double) {
+                return (double) x >= startRange && (double) x <= endRange;
+            }
             return false;
-        }
-
-        return true;
+        });
+        return this;
     }
 }
