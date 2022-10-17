@@ -12,7 +12,7 @@ public final class MapSchema extends BaseSchema {
         addPredicate(map -> ((Map<?, ?>) map).size() == size);
         return this;
     }
-    public final void shape(final Map<String, BaseSchema> map) {
+    public void shape(final Map<String, BaseSchema> map) {
         addPredicate(x -> {
             for (Map.Entry<String, BaseSchema> entry : map.entrySet()) {
                 if (!entry.getValue().isValid(((Map<?, ?>) x).get(entry.getKey()))) {
