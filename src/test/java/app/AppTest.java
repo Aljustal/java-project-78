@@ -178,11 +178,7 @@ public class AppTest {
 
         Map<String, Object> human2 = new HashMap<>();
         human2.put("name", "Maya");
-        human2.put("age", null);
-        Boolean actual2 = mapSchema.isValid(human2);
-        assertThat(actual2).isEqualTo(true);
     }
-
     @Test
     void testMapSchemaShape3() {
         Map<String, BaseSchema> schemas = new HashMap<>();
