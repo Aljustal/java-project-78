@@ -175,9 +175,6 @@ public class AppTest {
         schemas.put("name", validator.string().required());
         schemas.put("age", validator.number().positive());
         mapSchema.shape(schemas);
-
-        Map<String, Object> human2 = new HashMap<>();
-        human2.put("name", "Maya");
     }
     @Test
     void testMapSchemaShape3() {

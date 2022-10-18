@@ -7,7 +7,6 @@ import java.util.function.Predicate;
 public abstract  class BaseSchema {
 
     public abstract BaseSchema required();
-    private boolean required;
     private final List<Predicate> predicateList  = new ArrayList<>();
     final void addPredicate(Predicate predicate) {
         predicateList.add(predicate);
@@ -21,6 +20,6 @@ public abstract  class BaseSchema {
         return true;
     }
     protected final void requiredOn() {
-        required = true;
+        boolean required = true;
     }
 }
