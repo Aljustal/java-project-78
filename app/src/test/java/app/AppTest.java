@@ -13,7 +13,6 @@ import java.util.Map;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class AppTest {
-
     private final Validator validator = new Validator();
     private final StringSchema stringSchema = validator.string();
     private final NumberSchema numberSchema = validator.number();
