@@ -3,7 +3,6 @@ package hexlet.code.schemas;
 public final class NumberSchema extends BaseSchema {
     @Override
     public NumberSchema required() {
-        requiredOn();
         addPredicate(x -> {
             if (x instanceof Integer || x instanceof Double) {
                 return true;

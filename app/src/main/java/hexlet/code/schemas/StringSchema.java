@@ -3,7 +3,6 @@ package hexlet.code.schemas;
 public final class StringSchema extends BaseSchema {
     @Override
     public StringSchema required() {
-        requiredOn();
         addPredicate(x -> {
             if (x instanceof String) {
                 return !x.toString().isEmpty();

@@ -4,7 +4,6 @@ import java.util.Map;
 public final class MapSchema extends BaseSchema {
     @Override
     public MapSchema required() {
-        requiredOn();
         addPredicate(x -> x instanceof Map);
         return this;
     }

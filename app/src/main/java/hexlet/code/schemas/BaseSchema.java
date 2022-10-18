@@ -19,7 +19,4 @@ public abstract  class BaseSchema {
         }
         return true;
     }
-    protected final void requiredOn() {
-        boolean required = true;
-    }
 }
