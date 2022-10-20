@@ -15,7 +15,7 @@ public final class StringSchema extends BaseSchema {
         addPredicate(x -> x.toString().contains(subString));
         return this;
     }
-    public StringSchema length(int lenght) {
+    public StringSchema minLength(int lenght) {
         addPredicate(x -> x.toString().length() >= lenght);
         return this;
     }
