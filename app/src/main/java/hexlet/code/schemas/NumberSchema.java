@@ -20,6 +20,9 @@ public final class NumberSchema extends BaseSchema {
             if (x instanceof Double) {
                 return (double) x > 0;
             }
+            if (x == null) {
+                return true;
+            }
             return false;
         });
         return this;
